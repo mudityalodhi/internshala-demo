@@ -37,30 +37,30 @@ const Signup = () => {
       <h2 className="text-2xl font-bold text-gray-800 mb-2">Create your PopX account</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4 mt-6">
-        {[
+        {[ 
           { label: 'Full Name', name: 'fullName' },
           { label: 'Phone number', name: 'phone' },
           { label: 'Email address', name: 'email' },
           { label: 'Password', name: 'password', type: 'password' },
-          { label: 'Company name', name: 'company' },
+          { label: 'Company name', name: 'company' }
         ].map((field) => (
-          <div key={field.name}>
-            <label className="text-xs font-medium text-[#6C25FF]">
-              {field.label} *
+          <div key={field.name} className="relative">
+            <label className="text-xs font-medium text-[#6C25FF] absolute left-3 top-2 z-10 bg-[#FAFAFA] px-1">
+              {field.label} <span className='text-red-600'>*</span>
             </label>
             <input
               type={field.type || 'text'}
               name={field.name}
               value={form[field.name]}
               onChange={handleChange}
-              placeholder={field.label}
-              className="w-full mt-1 px-3 py-2 border border-gray-300 rounded outline-none"
+              placeholder=" "
+              className="w-full mt-4 px-3 py-3 border border-gray-300 rounded text-sm outline-none placeholder-transparent"
               required
             />
           </div>
         ))}
 
-        <div>
+        <div className="relative">
           <label className="text-xs font-medium text-[#6C25FF] block mb-1">
             Are you an Agency? *
           </label>

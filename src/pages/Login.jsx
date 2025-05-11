@@ -6,49 +6,60 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const isValid = email.trim() && password.trim();
 
-    // For now, just navigate to Account page after any login
-    if (email && password) {
-      navigate('/account');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValid) {
+      navigate('/account', {
+        state: { email, fullName: 'Test User' }
+      });
     }
   };
 
   return (
-    <div className="pt-8">
-      <h2 className="text-2xl font-bold text-gray-800 mb-2">Signin to your PopX account</h2>
-      <p className="text-sm text-gray-500 mb-6">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-      </p>
-      <form onSubmit={handleLogin} className="space-y-4">
-        <div>
-          <label className="text-xs font-medium text-[#6C25FF]">Email Address</label>
+    <div className="flex items-start justify-center min-h-screen bg-[#FAFAFA] px-4 pb-10 pt-6">
+      <form onSubmit={handleSubmit} className="w-full max-w-md">
+        <h2 className="text-2xl font-bold text-gray-800 mb-4">Signin to your PopX account</h2>
+        <p className="text-sm text-gray-500 mb-6">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
+
+        {/* Email Input Field */}
+        <div className="mb-4 relative">
+          <label className="text-xs font-medium text-[#6C25FF] absolute left-3 top-2 z-10 bg-[#FAFAFA] px-1">
+            Email Address
+          </label>
           <input
             type="email"
-            placeholder="Enter email address"
+            placeholder=" "
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded outline-none"
+            className="w-full mt-4 px-3 py-3 border border-gray-300 rounded text-sm outline-none placeholder-transparent"
             required
           />
         </div>
 
-        <div>
-          <label className="text-xs font-medium text-[#6C25FF]">Password</label>
+        {/* Password Input Field */}
+        <div className="mb-6 relative">
+          <label className="text-xs font-medium text-[#6C25FF] absolute left-3 top-2 z-10 bg-[#FAFAFA] px-1">
+            Password
+          </label>
           <input
             type="password"
-            placeholder="Enter password"
+            placeholder=" "
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded outline-none"
+            className="w-full mt-4 px-3 py-3 border border-gray-300 rounded text-sm outline-none placeholder-transparent"
             required
           />
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-gray-300 text-white font-semibold py-2 rounded cursor-pointer"
+          className={`w-full py-3 rounded text-white font-semibold text-sm ${isValid ? 'bg-[#6C25FF]' : 'bg-[#CBCBCB]'}`}
+          disabled={!isValid}
         >
           Login
         </button>
